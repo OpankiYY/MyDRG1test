@@ -319,131 +319,27 @@ task.spawn(function()
 end)
 
 -- ========================================================================================================================================
--- [[ СЕКЦИЯ 8: ПОЛЬЗОВАТЕЛЬСКИЙ ГРАФИЧЕСКИЙ ИНТЕРФЕЙС (UI CONSTRUCTION) ]]
+-- [[ СЕКЦИЯ 8: ПОЛЬЗОВАТЕЛЬСКИЙ ГРАФИЧЕСКИЙ ИНТЕРФЕЙС (УДАЛЕН - ЗАМЕНЕН НА ПУСТЫШКИ) ]]
 -- ========================================================================================================================================
 
-local function CreateSophisticatedUserInterface()
-    local ExistingInterfaceObject = CoreGuiServiceInstance:FindFirstChild("DragonScriptPerformanceGui")
-    if ExistingInterfaceObject then ExistingInterfaceObject:Destroy() end
-    
-    local MainScreenGuiInstance = Instance.new("ScreenGui")
-    MainScreenGuiInstance.Name = "DragonScriptPerformanceGui"
-    MainScreenGuiInstance.Parent = CoreGuiServiceInstance
-    MainScreenGuiInstance.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-    
-    local MainBackgroundFrame = Instance.new("Frame")
-    MainBackgroundFrame.Name = "MainBackgroundFrame"
-    MainBackgroundFrame.Parent = MainScreenGuiInstance
-    MainBackgroundFrame.BackgroundColor3 = Color3.fromRGB(12, 12, 12)
-    MainBackgroundFrame.BorderSizePixel = 0
-    MainBackgroundFrame.Position = UDim2.new(0.5, -300, 0.5, -150)
-    MainBackgroundFrame.Size = UDim2.new(0, 600, 0, 300)
-    MainBackgroundFrame.Active = true
-    MainBackgroundFrame.Draggable = true
-    
-    local MainFrameCorner = Instance.new("UICorner")
-    MainFrameCorner.CornerRadius = UDim.new(0, 12)
-    MainFrameCorner.Parent = MainBackgroundFrame
-    
-    local HeaderTitleFrame = Instance.new("Frame")
-    HeaderTitleFrame.Name = "HeaderTitleFrame"
-    HeaderTitleFrame.Parent = MainBackgroundFrame
-    HeaderTitleFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-    HeaderTitleFrame.BorderSizePixel = 0
-    HeaderTitleFrame.Size = UDim2.new(1, 0, 0, 50)
-    
-    local HeaderFrameCorner = Instance.new("UICorner")
-    HeaderFrameCorner.CornerRadius = UDim.new(0, 12)
-    HeaderFrameCorner.Parent = HeaderTitleFrame
-    
-    local HeaderTitleLabel = Instance.new("TextLabel")
-    HeaderTitleLabel.Name = "HeaderTitleLabel"
-    HeaderTitleLabel.Parent = HeaderTitleFrame
-    HeaderTitleLabel.BackgroundTransparency = 1
-    HeaderTitleLabel.Position = UDim2.new(0, 20, 0, 0)
-    HeaderTitleLabel.Size = UDim2.new(1, -40, 1, 0)
-    HeaderTitleLabel.Font = Enum.Font.GothamBold
-    HeaderTitleLabel.Text = "DRAGON SCRIPT V15.9.1 | ORBIT FARM FIX"
-    HeaderTitleLabel.TextColor3 = Color3.fromRGB(0, 210, 255)
-    HeaderTitleLabel.TextSize = 18
-    HeaderTitleLabel.TextXAlignment = Enum.TextXAlignment.Left
-    
-    local StatusInformationContainer = Instance.new("Frame")
-    StatusInformationContainer.Name = "StatusInformationContainer"
-    StatusInformationContainer.Parent = MainBackgroundFrame
-    StatusInformationContainer.BackgroundTransparency = 1
-    StatusInformationContainer.Position = UDim2.new(0, 20, 0, 70)
-    StatusInformationContainer.Size = UDim2.new(0, 350, 0, 200)
-    
-    local IslandStatusTextLabel = Instance.new("TextLabel")
-    IslandStatusTextLabel.Name = "IslandStatusTextLabel"
-    IslandStatusTextLabel.Parent = StatusInformationContainer
-    IslandStatusTextLabel.BackgroundTransparency = 1
-    IslandStatusTextLabel.Size = UDim2.new(1, 0, 0, 30)
-    IslandStatusTextLabel.Font = Enum.Font.GothamBold
-    IslandStatusTextLabel.Text = "ОСТРОВ: ПОИСК..."
-    IslandStatusTextLabel.TextColor3 = Color3.fromRGB(255, 50, 50)
-    IslandStatusTextLabel.TextSize = 20
-    IslandStatusTextLabel.TextXAlignment = Enum.TextXAlignment.Left
-    
-    local ActionStatusTextLabel = Instance.new("TextLabel")
-    ActionStatusTextLabel.Name = "ActionStatusTextLabel"
-    ActionStatusTextLabel.Parent = StatusInformationContainer
-    ActionStatusTextLabel.BackgroundTransparency = 1
-    ActionStatusTextLabel.Position = UDim2.new(0, 0, 0, 40)
-    ActionStatusTextLabel.Size = UDim2.new(1, 0, 0, 30)
-    ActionStatusTextLabel.Font = Enum.Font.GothamBold
-    ActionStatusTextLabel.Text = "Действие: ОЖИДАНИЕ"
-    ActionStatusTextLabel.TextColor3 = Color3.fromRGB(0, 255, 255)
-    ActionStatusTextLabel.TextSize = 20
-    ActionStatusTextLabel.TextXAlignment = Enum.TextXAlignment.Left
-    
-    local TimerStatusTextLabel = Instance.new("TextLabel")
-    TimerStatusTextLabel.Name = "TimerStatusTextLabel"
-    TimerStatusTextLabel.Parent = StatusInformationContainer
-    TimerStatusTextLabel.BackgroundTransparency = 1
-    TimerStatusTextLabel.Position = UDim2.new(0, 0, 0, 80)
-    TimerStatusTextLabel.Size = UDim2.new(1, 0, 0, 30)
-    TimerStatusTextLabel.Font = Enum.Font.GothamMedium
-    TimerStatusTextLabel.Text = "ТАЙМЕР: 0 СЕКУНД"
-    TimerStatusTextLabel.TextColor3 = Color3.fromRGB(180, 180, 180)
-    TimerStatusTextLabel.TextSize = 16
-    TimerStatusTextLabel.TextXAlignment = Enum.TextXAlignment.Left
-    
-    local ControlToggleButton = Instance.new("TextButton")
-    ControlToggleButton.Name = "ControlToggleButton"
-    ControlToggleButton.Parent = MainBackgroundFrame
-    ControlToggleButton.BackgroundColor3 = Color3.fromRGB(231, 76, 60)
-    ControlToggleButton.Position = UDim2.new(1, -220, 0, 70)
-    ControlToggleButton.Size = UDim2.new(0, 200, 0, 50)
-    ControlToggleButton.Font = Enum.Font.GothamBold
-    ControlToggleButton.Text = "FULL AUTO: OFF"
-    ControlToggleButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-    ControlToggleButton.TextSize = 18
-    
-    local ButtonCorner = Instance.new("UICorner")
-    ButtonCorner.CornerRadius = UDim.new(0, 8)
-    ButtonCorner.Parent = ControlToggleButton
-    
-    local function UpdateButtonVisualRepresentation()
-        if ScriptGlobalConfiguration.FullAutoEnabledStatus then
-            ControlToggleButton.Text = "FULL AUTO: ON"
-            ControlToggleButton.BackgroundColor3 = Color3.fromRGB(46, 204, 113)
-        else
-            ControlToggleButton.Text = "FULL AUTO: OFF"
-            ControlToggleButton.BackgroundColor3 = Color3.fromRGB(231, 76, 60)
-        end
-    end
-    
-    ControlToggleButton.MouseButton1Click:Connect(function()
-        ScriptGlobalConfiguration.FullAutoEnabledStatus = not ScriptGlobalConfiguration.FullAutoEnabledStatus
-        UpdateButtonVisualRepresentation()
-    end)
-    
-    return IslandStatusTextLabel, ActionStatusTextLabel, TimerStatusTextLabel
-end
+-- Меню отключено по вашему запросу. FullAuto включен изначально в ScriptGlobalConfiguration.
+-- Чтобы цикл в Секции 10 не сломался (так как он пытается менять .Text и .TextColor3),
+-- созданы виртуальные таблицы-пустышки. Они принимают данные, но ничего не отрисовывают.
 
-local IslandStatusLabel, ActionStatusLabel, TimerStatusLabel = CreateSophisticatedUserInterface()
+local IslandStatusLabel = {
+    Text = "",
+    TextColor3 = Color3.fromRGB(255, 255, 255)
+}
+
+local ActionStatusLabel = {
+    Text = "",
+    TextColor3 = Color3.fromRGB(255, 255, 255)
+}
+
+local TimerStatusLabel = {
+    Text = "",
+    TextColor3 = Color3.fromRGB(255, 255, 255)
+}
 
 -- ========================================================================================================================================
 -- [[ СЕКЦИЯ 9: ЛОГИКА УПРАВЛЕНИЯ ОЧЕРЕДЬЮ ЦЕЛЕЙ (TARGET QUEUE MANAGEMENT) ]]
@@ -524,7 +420,7 @@ RunServiceInstance.Heartbeat:Connect(function(DeltaTimeStepValue)
         GlobalRuntimeStateParameters.IsFarmingPermissionGrantedStatus = false
         GlobalRuntimeStateParameters.SpawnPointSetInitialStatus = false
         GlobalRuntimeStateParameters.RelicActivationEndTimeTick = 0
-        GlobalRuntimeStateParameters.RelicWaitStartTimeTick = 0 
+        GlobalRuntimeStateParameters.RelicWaitStartTimeTick = 0
         GlobalRuntimeStateParameters.RelicActivationPositionVector = nil
         GlobalRuntimeStateParameters.DangerLavaDeletionStatus = false
         GlobalRuntimeStateParameters.DragonEggPhaseStartedStatus = false
